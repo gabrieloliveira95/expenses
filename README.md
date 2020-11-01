@@ -1,7 +1,7 @@
-# expenses
+# Expenses
 
-Projeto realizado no Curso Flutter Ios e Andoid 2020 pro Leonardo Moura Leitao e Maximilian Schwarzmüller
+Flutter Ios e Andoid 2020 Course by Leonardo Moura Leitao and Maximilian Schwarzmüller
 
-- Desenvolvido em Flutter e Dart
+- Flutter and Dart
 
-### Aplicativo de Despesas Pessoais
+### Expenses APP
