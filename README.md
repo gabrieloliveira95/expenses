@@ -4,4 +4,15 @@ Flutter Ios e Andoid 2020 Course by Leonardo Moura Leitao and Maximilian Schwarz
 
 - Flutter and Dart
 
-### Expenses APP
+### Expenses APP Focus
+  - Responsive Application
+  - State Change
+  - ListView
+  - Build simple Chart
+  - Platform Responsive (Cupertino and MaterialApp)
+  - DatePicker
+  - Global Theme
+  - One Scrren
+  - Modal View
+
+
