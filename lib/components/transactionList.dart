@@ -1,79 +1,56 @@
-import 'package:expenses/models/transaction.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:intl/intl.dart';
+import './transaction_item.dart';
 import '../models/transaction.dart';
 
 class TransactionList extends StatelessWidget {
-  final List<Transaction> transaction;
+  final List<Transaction> transactions;
   final void Function(String) onRemove;
 
-  TransactionList(this.transaction, this.onRemove);
+  TransactionList(this.transactions, this.onRemove);
 
   @override
   Widget build(BuildContext context) {
-    return transaction.isEmpty
+    return transactions.isEmpty
         ? LayoutBuilder(
             builder: (ctx, constraints) {
-              return Column(children: [
-                SizedBox(height: constraints.maxHeight * 0.05),
-                Text(
-                  "Nenhuma Transação Cadastrada",
-                  style: Theme.of(context).textTheme.headline6,
-                ),
-                SizedBox(height: constraints.maxHeight * 0.05),
-                Container(
-                  height: constraints.maxHeight * 0.6,
-                  child: Image.asset(
-                    'assets/images/waiting.png',
-                    fit: BoxFit.cover,
+              return Column(
+                children: <Widget>[
+                  const SizedBox(height: 20),
+                  Text(
+                    'Nenhuma Transação Cadastrada!',
+                    style: Theme.of(context).textTheme.headline6,
                   ),
-                ),
-              ]);
+                  const SizedBox(height: 20),
+                  Container(
+                    height: constraints.maxHeight * 0.6,
+                    child: Image.asset(
+                      'assets/images/waiting.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ],
+              );
             },
           )
         : ListView.builder(
-            itemCount: transaction.length,
+            itemCount: transactions.length,
             itemBuilder: (ctx, index) {
-              final e = transaction[index];
-              return Card(
-                elevation: 5,
-                margin: EdgeInsets.symmetric(
-                  vertical: 8,
-                  horizontal: 5,
-                ),
-                child: ListTile(
-                  leading: CircleAvatar(
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: FittedBox(
-                        child: Text('R\$${e.value}'),
-                      ),
-                    ),
-                    radius: 30,
-                  ),
-                  title: Text(
-                    e.title,
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                  subtitle: Text(
-                    DateFormat('d MMM y').format(e.date),
-                  ),
-                  trailing: MediaQuery.of(context).size.width > 500
-                      ? FlatButton.icon(
-                          icon: Icon(Icons.delete_forever),
-                          label: Text("Excluir"),
-                          onPressed: () => onRemove(e.id),
-                          textColor: Theme.of(context).errorColor,
-                        )
-                      : IconButton(
-                          icon: Icon(Icons.delete_forever),
-                          onPressed: () => onRemove(e.id),
-                          color: Theme.of(context).errorColor,
-                        ),
-                ),
+              final tr = transactions[index];
+              return TransactionItem(
+                key: GlobalObjectKey(tr),
+                tr: tr,
+                onRemove: onRemove,
               );
             },
           );
+    //   ListView(
+    //   children: transactions.map((tr) {
+    //     return TransactionItem(
+    //       key: ValueKey(tr.id),
+    //       tr: tr,
+    //       onRemove: onRemove,
+    //     );
+    //   }).toList(),
+    // );
   }
 }
